@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Money Map | A Field Guide to Your Money</title>
+    <meta name="description"
+        content="Personal finance coaching with Marcia. Budgeting, investing, debt management and savings — mapped out, step by step.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,560;1,9..144,300;1,9..144,400;1,9..144,560&family=Archivo:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-lang="en">
+
+    <!-- Custom cursor (desktop only) -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader-inner">
+            <span class="loader-word">My&nbsp;Money&nbsp;Map</span>
+            <span class="loader-rule"></span>
+        </div>
+    </div>
+
+    <!-- ================= NAV ================= -->
+    <header class="nav" id="nav">
+        <a href="#top" class="nav-brand">
+            My&nbsp;Money&nbsp;Map<span class="brand-dot">.</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+            <a href="#services" class="nav-link" data-i18n="nav.services">The Territory</a>
+            <a href="#instrument" class="nav-link" data-i18n="nav.instrument">The Instrument</a>
+            <a href="#about" class="nav-link" data-i18n="nav.about">The Guide</a>
+            <a href="#contact" class="nav-link" data-i18n="nav.contact">First Step</a>
+        </nav>
+        <div class="nav-right">
+            <div class="lang-switch" role="group" aria-label="Language">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <span class="lang-sep">/</span>
+                <button class="lang-btn" data-lang="pt">PT</button>
+            </div>
+            <a href="#contact" class="btn-pill magnetic" data-i18n="nav.cta">Book a free call</a>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <!-- ================= HERO ================= -->
+        <section class="hero" id="hero">
+            <canvas id="terrain" class="hero-canvas" aria-hidden="true"></canvas>
+
+            <div class="hero-inner">
+                <p class="kicker hero-kicker">
+                    <span class="kicker-num">00</span>
+                    <span data-i18n="hero.kicker">Personal finance coaching</span>
+                    <span class="kicker-rule"></span>
+                </p>
+
+                <h1 class="hero-title">
+                    <span class="line"><span class="line-inner" data-i18n="hero.l1">Where does</span></span>
+                    <span class="line"><span class="line-inner" data-i18n="hero.l2">your money</span></span>
+                    <span class="line"><span class="line-inner accent-italic" data-i18n="hero.l3">actually go?</span></span>
+                </h1>
+
+                <div class="hero-foot">
+                    <p class="hero-desc" data-i18n="hero.desc">
+                        Expert coaching on budgeting, debt and investing.
+                        Let's chart the route to your financial freedom — together.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#instrument" class="btn-solid magnetic" data-i18n="hero.cta1">Start your journey</a>
+                        <a href="#about" class="btn-ghost magnetic" data-i18n="hero.cta2">Meet Marcia</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-scroll" aria-hidden="true">
+                <span class="hero-scroll-label" data-i18n="hero.scroll">Scroll to begin</span>
+                <span class="hero-scroll-line"></span>
+            </div>
+        </section>
+
+        <!-- ================= MARQUEE ================= -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track" id="marqueeTrack">
+                <span class="marquee-seq" data-i18n="marquee">Budgeting&ensp;·&ensp;Debt&ensp;·&ensp;Investing&ensp;·&ensp;Savings&ensp;·&ensp;Miles&ensp;·&ensp;</span>
+            </div>
+        </div>
+
+        <!-- ================= 01 SERVICES ================= -->
+        <section class="chapter services" id="services">
+            <p class="kicker reveal">
+                <span class="kicker-num">01</span>
+                <span data-i18n="services.kicker">The territory</span>
+                <span class="kicker-rule"></span>
+            </p>
+
+            <h2 class="chapter-title reveal">
+                <span data-i18n="services.t1">Four routes,</span><br>
+                <em class="accent" data-i18n="services.t2">one destination.</em>
+            </h2>
+
+            <ul class="service-list">
+                <li class="service-row reveal" data-index="01">
+                    <span class="service-num">01</span>
+                    <h3 class="service-name" data-i18n="services.1.name">Budgeting &amp; Planning</h3>
+                    <p class="service-desc" data-i18n="services.1.desc">A realistic spending plan that fits your
+                        lifestyle while protecting your long-term goals.</p>
+                    <span class="service-arrow" aria-hidden="true">→</span>
+                </li>
+                <li class="service-row reveal" data-index="02">
+                    <span class="service-num">02</span>
+                    <h3 class="service-name" data-i18n="services.2.name">Debt Management</h3>
+                    <p class="service-desc" data-i18n="services.2.desc">Strategies to dismantle debt efficiently and
+                        take back control of your financial health.</p>
+                    <span class="service-arrow" aria-hidden="true">→</span>
+                </li>
+                <li class="service-row reveal" data-index="03">
+                    <span class="service-num">03</span>
+                    <h3 class="service-name" data-i18n="services.3.name">Investing Basics</h3>
+                    <p class="service-desc" data-i18n="services.3.desc">The stock market, demystified — building a
+                        diversified portfolio for future growth.</p>
+                    <span class="service-arrow" aria-hidden="true">→</span>
+                </li>
+                <li class="service-row reveal" data-index="04">
+                    <span class="service-num">04</span>
+                    <h3 class="service-name" data-i18n="services.4.name">Miles &amp; Discounts</h3>
+                    <p class="service-desc" data-i18n="services.4.desc">Maximise rewards, travel for less, and surface
+                        the hidden savings in everyday life.</p>
+                    <span class="service-arrow" aria-hidden="true">→</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- ================= 02 INSTRUMENT ================= -->
+        <section class="chapter instrument" id="instrument">
+            <p class="kicker reveal">
+                <span class="kicker-num">02</span>
+                <span data-i18n="instrument.kicker">The instrument</span>
+                <span class="kicker-rule"></span>
+            </p>
+
+            <h2 class="chapter-title reveal">
+                <span data-i18n="instrument.t1">How hard could</span><br>
+                <em class="accent" data-i18n="instrument.t2">your money work?</em>
+            </h2>
+
+            <p class="chapter-sub reveal" data-i18n="instrument.sub">
+                Drag the dial. One habit — a monthly amount set aside — compounds into something bigger.
+            </p>
+
+            <div class="panel reveal" id="gaugePanel">
+                <div class="panel-left">
+                    <svg class="gauge" viewBox="0 0 300 190" id="gaugeSvg" aria-hidden="true">
+                        <path class="gauge-track" d="M 30 160 A 120 120 0 0 1 270 160" />
+                        <path class="gauge-fill" id="gaugeFill" d="M 30 160 A 120 120 0 0 1 270 160" />
+                        <g id="gaugeTicks"></g>
+                        <line id="gaugeNeedle" class="gauge-needle" x1="150" y1="160" x2="150" y2="48" />
+                        <circle class="gauge-pivot" cx="150" cy="160" r="7" />
+                    </svg>
+                    <div class="gauge-readout">
+                        <span class="gauge-value accent-italic" id="gaugeValue">£250</span>
+                        <span class="gauge-caption mono" data-i18n="instrument.permonth">set aside per month</span>
+                    </div>
+                </div>
+
+                <div class="panel-right">
+                    <div class="scale">
+                        <input type="range" id="amountRange" min="0" max="1000" step="10" value="250"
+                            aria-label="Monthly amount">
+                        <div class="scale-labels mono" aria-hidden="true">
+                            <span>£0</span><span>£250</span><span>£500</span><span>£750</span><span>£1k</span>
+                        </div>
+                    </div>
+
+                    <div class="projection">
+                        <p class="projection-note" data-i18n="instrument.note">
+                            Kept up for ten years at a steady 8% annual growth, that habit becomes
+                        </p>
+                        <p class="projection-value" id="projValue">£46,041</p>
+                        <p class="projection-foot mono" data-i18n="instrument.foot">
+                            Illustration only — not financial advice. The map is drawn together, in coaching.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 03 ABOUT ================= -->
+        <section class="chapter about" id="about">
+            <p class="kicker reveal">
+                <span class="kicker-num">03</span>
+                <span data-i18n="about.kicker">The guide</span>
+                <span class="kicker-rule"></span>
+            </p>
+
+            <div class="about-grid">
+                <div class="about-media reveal-img">
+                    <img src="assets/images/real_marcia.png" alt="Marcia, certified personal finance consultant"
+                        class="about-img">
+                    <span class="about-badge mono">C.P.F.E.®&nbsp;Certified</span>
+                </div>
+
+                <div class="about-copy">
+                    <h2 class="chapter-title reveal">
+                        <span data-i18n="about.t1">Your partner in</span><br>
+                        <em class="accent" data-i18n="about.t2">wealth building.</em>
+                    </h2>
+                    <p class="about-desc reveal" data-i18n="about.desc">
+                        Financial freedom isn't just about the numbers; it's the confidence to live the life you
+                        want. As a Certified Personal Finance Consultant, I bridge the gap between complex financial
+                        concepts and actionable daily habits.
+                    </p>
+                    <ul class="creds">
+                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c1">Certified
+                                Personal Finance Consultant (C.P.F.E.®)</span></li>
+                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c2">Specialised
+                                in savings &amp; miles optimisation</span></li>
+                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c3">1-on-1
+                                mentoring sessions</span></li>
+                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c4">Tailored
+                                roadmaps for every client</span></li>
+                    </ul>
+                    <a href="#contact" class="btn-solid magnetic reveal" data-i18n="about.cta">Book a free discovery
+                        call</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 04 CONTACT ================= -->
+        <section class="chapter contact" id="contact">
+            <p class="kicker reveal">
+                <span class="kicker-num">04</span>
+                <span data-i18n="contact.kicker">The first step</span>
+                <span class="kicker-rule"></span>
+            </p>
+
+            <h2 class="chapter-title reveal">
+                <span data-i18n="contact.t1">Ready to draw</span><br>
+                <em class="accent" data-i18n="contact.t2">your map?</em>
+            </h2>
+
+            <p class="chapter-sub reveal" data-i18n="contact.sub">
+                Send a message and Marcia will reply within 24 hours.
+            </p>
+
+            <form class="contact-form reveal" id="contactForm" novalidate>
+                <div class="field">
+                    <label for="contactName" class="mono" data-i18n="contact.name">Your name</label>
+                    <input type="text" id="contactName" autocomplete="name" required>
+                </div>
+                <div class="field">
+                    <label for="contactEmail" class="mono" data-i18n="contact.email">Your email</label>
+                    <input type="email" id="contactEmail" autocomplete="email" required>
+                </div>
+                <div class="field field-wide">
+                    <label for="contactMessage" class="mono" data-i18n="contact.message">Your goal</label>
+                    <textarea id="contactMessage" rows="4" required
+                        data-i18n-placeholder="contact.placeholder"
+                        placeholder="e.g. 'Optimise my UK–Portugal miles'"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-solid magnetic" id="submitBtn"
+                        data-i18n="contact.submit">Send message</button>
+                    <p class="form-msg mono" id="formMsg" role="status"></p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-top">
+            <span class="footer-brand">My&nbsp;Money&nbsp;Map<span class="brand-dot">.</span></span>
+            <p class="footer-tag" data-i18n="footer.tag">Empowering your financial future.</p>
+        </div>
+        <div class="footer-bottom mono">
+            <span>myfinancemap.uk</span>
+            <span class="footer-social">
+                <a href="https://www.linkedin.com/in/marciapregal/" target="_blank" rel="noopener">LinkedIn</a>
+                <span>&ensp;/&ensp;</span>
+                <a href="https://www.instagram.com/myfinancemap.uk/" target="_blank" rel="noopener">Instagram</a>
+            </span>
+            <span data-i18n="footer.copy">© 2026 My Money Map. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
