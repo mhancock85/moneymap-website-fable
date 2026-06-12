@@ -45,6 +45,7 @@
             "instrument.permonth": "set aside per month",
             "instrument.note": "Kept up for ten years at a steady 8% annual growth, that habit becomes",
             "instrument.foot": "Illustration only — not financial advice. The map is drawn together, in coaching.",
+            "instrument.figcap": "Field notes — the Money Map planner",
             "about.kicker": "The guide",
             "about.t1": "Your partner in",
             "about.t2": "wealth building.",
@@ -66,6 +67,7 @@
             "contact.sending": "Sending…",
             "contact.success": "Thank you — Marcia will be in touch soon.",
             "contact.error": "Something went wrong. Please try again or email directly.",
+            "contact.figcap": "The kettle is on — let's talk.",
             "footer.tag": "Empowering your financial future.",
             "footer.copy": "© 2026 My Money Map. All rights reserved."
         },
@@ -102,6 +104,7 @@
             "instrument.permonth": "guardado por mês",
             "instrument.note": "Mantido por dez anos com crescimento de 8% ao ano, esse hábito se torna",
             "instrument.foot": "Apenas ilustrativo — não é aconselhamento financeiro. O mapa é desenhado junto, na consultoria.",
+            "instrument.figcap": "Notas de campo — o planner Money Map",
             "about.kicker": "A guia",
             "about.t1": "Sua parceira na",
             "about.t2": "construção de patrimônio.",
@@ -123,6 +126,7 @@
             "contact.sending": "Enviando…",
             "contact.success": "Obrigada — a Marcia entrará em contato em breve.",
             "contact.error": "Algo deu errado. Tente novamente ou envie um e-mail diretamente.",
+            "contact.figcap": "O café está pronto — vamos conversar.",
             "footer.tag": "Fortalecendo o seu futuro financeiro.",
             "footer.copy": "© 2026 My Money Map. Todos os direitos reservados."
         }
@@ -282,21 +286,22 @@
             });
         });
 
-        // --- About image clip reveal ---
-        const aboutImg = document.querySelector(".reveal-img");
-        if (aboutImg && !prefersReduced) {
-            gsap.fromTo(aboutImg,
-                { clipPath: "inset(0 0 100% 0)" },
-                {
-                    clipPath: "inset(0 0 0% 0)", duration: 1.3, ease: "power3.inOut",
-                    scrollTrigger: { trigger: aboutImg, start: "top 80%" }
-                });
-            gsap.fromTo(aboutImg.querySelector("img"),
-                { scale: 1.18 },
-                {
-                    scale: 1, duration: 1.6, ease: "power2.out",
-                    scrollTrigger: { trigger: aboutImg, start: "top 80%" }
-                });
+        // --- Image clip reveals ---
+        if (!prefersReduced) {
+            document.querySelectorAll(".reveal-img").forEach(wrap => {
+                gsap.fromTo(wrap,
+                    { clipPath: "inset(0 0 100% 0)" },
+                    {
+                        clipPath: "inset(0 0 0% 0)", duration: 1.3, ease: "power3.inOut",
+                        scrollTrigger: { trigger: wrap, start: "top 80%" }
+                    });
+                gsap.fromTo(wrap.querySelector("img"),
+                    { scale: 1.18 },
+                    {
+                        scale: 1, duration: 1.6, ease: "power2.out",
+                        scrollTrigger: { trigger: wrap, start: "top 80%" }
+                    });
+            });
         }
 
         // --- Marquee: duplicate content, infinite drift, scroll-direction aware ---
