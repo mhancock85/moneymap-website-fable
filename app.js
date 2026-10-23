@@ -1,5 +1,5 @@
 /* ============================================================
-   MY MONEY MAP — Field Guide redesign
+   MY MONEY LIFE: Field Guide redesign
    three.js contour terrain · GSAP choreography · gauge · i18n
    ============================================================ */
 
@@ -9,6 +9,8 @@
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isTouch = window.matchMedia("(hover: none)").matches;
     if (prefersReduced) document.documentElement.classList.add("reduced-motion");
+    let motionPaused = false;
+    const motionListeners = [];
 
     /* ================= i18n ================= */
     const translations = {
@@ -18,15 +20,20 @@
             "nav.about": "The Guide",
             "nav.contact": "First Step",
             "nav.cta": "Book a free call",
+            "nav.menu": "Menu",
             "hero.kicker": "Personal finance coaching",
             "hero.l1": "Where does",
             "hero.l2": "your money",
             "hero.l3": "actually go?",
-            "hero.desc": "Expert coaching on budgeting, debt and investing. Let’s chart the route to your financial freedom — together.",
+            "hero.desc": "Expert coaching on budgeting, debt and investing. Let’s chart the route to your financial freedom, together.",
             "hero.cta1": "Start your journey",
             "hero.cta2": "Meet Marcia",
             "hero.scroll": "Scroll to begin",
             "marquee": "Budgeting · Debt · Investing · Savings · Miles · ",
+            "skip": "Skip to main content",
+            "motion.pause": "Pause motion",
+            "motion.play": "Play motion",
+            "range.perMonth": "a month",
             "services.kicker": "The territory",
             "services.t1": "Four routes,",
             "services.t2": "one destination.",
@@ -35,27 +42,32 @@
             "services.2.name": "Debt Management",
             "services.2.desc": "Strategies to dismantle debt efficiently and take back control of your financial health.",
             "services.3.name": "Investing Basics",
-            "services.3.desc": "The stock market, demystified — building a diversified portfolio for future growth.",
+            "services.3.desc": "Learn how the stock market works, so you can make your own investing choices with confidence.",
             "services.4.name": "Miles & Discounts",
             "services.4.desc": "Maximise rewards, travel for less, and surface the hidden savings in everyday life.",
             "instrument.kicker": "The instrument",
             "instrument.t1": "How much could",
             "instrument.t2": "your money grow?",
-            "instrument.sub": "Drag the dial. One habit — a monthly amount set aside — compounds into something bigger.",
+            "instrument.sub": "Drag the dial. One habit, a monthly amount set aside, can grow into something bigger.",
             "instrument.permonth": "set aside per month",
             "instrument.note": "Kept up for ten years at a steady 8% annual growth, that habit becomes",
-            "instrument.foot": "8% is a conservative take on long-term stock market history — the S&P 500 has averaged around 10% a year over the past 50 years. Illustration only — not financial advice, and past performance doesn't guarantee future returns.",
-            "instrument.figcap": "Field notes — the Money Map planner",
-            "about.kicker": "The guide",
-            "about.t1": "Your partner in",
-            "about.t2": "wealth building.",
-            "about.desc": "Financial freedom isn’t just about the numbers; it’s the confidence to live the life you want. As a Certified Personal Finance Consultant, I bridge the gap between complex financial concepts and actionable daily habits.",
-            "about.c1": "Certified Personal Finance Consultant (C.P.F.E.®)",
+            "instrument.foot": "8% is a conservative take on long-term stock market history. The S&P 500 has averaged around 10% a year over the past 50 years. Illustration only, not financial advice. Past performance doesn’t guarantee future returns.",
+            "instrument.figcap": "Field notes: the My Money Life planner",
+            "about.kicker": "Meet Marcia",
+            "about.t1": "Hi, I’m Marcia.",
+            "about.desc": "I’ve lived, worked and studied in Brazil, Australia and the UK. Each move meant starting from zero: new bank accounts, no credit history, buying everything again. I know how much planning that takes.",
+            "about.desc2": "After more than 20 years in corporate finance, I moved into personal finance because I wanted my work to help people directly.",
+            "about.desc3": "I’ve faced big money moments of my own. Finding my first job in a new country was hard, and so was going through a divorce while responsible for myself and my daughter. Because I’ve always been organised with money, I had choices and never felt trapped.",
+            "about.desc4": "Managing money has always come naturally to me, and it’s what let me study and work abroad. I’d like you to have that same sense of freedom. I know how stressful big changes can be, so I lead every session with empathy.",
+            "about.desc5": "Today I work with clients around the world. I’m trained in special needs financial planning, so I can support neurodivergent and special needs families. I also help Brazilians living abroad.",
+            "about.desc6": "Everyone’s experience with money is different and personal, so we start with yours. We’ll get a clear picture of your money and work through any worries or negative feelings that hold you back. Then we’ll build a plan that fits your life.",
+            "about.desc7": "Family and friends are my anchor. I’m a mum and stepmum to teenagers. I love music, and I play a few instruments and sing with UK Show Choir at some epic venues.",
+            "about.c1": "Certified Personal Finance Expert (C.P.F.E.®)",
             "about.c2": "Member of the Personal Finance Society (UK) and ABEFIN (Brazil)",
-            "about.c3": "Cross-border money mentoring sessions",
-            "about.c4": "Approachable, inclusive, non-judgemental",
-            "about.c5": "Tailored roadmaps for every client",
-            "about.cta": "Book a free discovery call",
+            "about.c3": "Sessions in English, Portuguese or Spanish",
+            "about.c4": "Ask me anything. No question is silly.",
+            "about.c5": "Mental Health First Aider (MHFA England)",
+            "about.cta": "Let’s map out your finances",
             "contact.kicker": "The first step",
             "contact.t1": "Ready to draw",
             "contact.t2": "your map?",
@@ -66,11 +78,11 @@
             "contact.placeholder": "e.g. ‘Start investing’, ‘Travel planning’",
             "contact.submit": "Send message",
             "contact.sending": "Sending…",
-            "contact.success": "Thank you — Marcia will be in touch soon.",
+            "contact.success": "Thank you. Marcia will be in touch soon.",
             "contact.error": "Something went wrong. Please try again or email directly.",
             "contact.figcap": "Let's start growing your money.",
             "footer.tag": "Empowering your financial future.",
-            "footer.copy": "© 2026 My Money Map. All rights reserved."
+            "footer.copy": "© 2026 My Money Life. All rights reserved."
         },
         pt: {
             "nav.services": "O Território",
@@ -78,6 +90,7 @@
             "nav.about": "A Guia",
             "nav.contact": "Primeiro Passo",
             "nav.cta": "Agende uma chamada",
+            "nav.menu": "Menu",
             "hero.kicker": "Consultoria financeira pessoal",
             "hero.l1": "Para onde vai",
             "hero.l2": "o seu dinheiro,",
@@ -87,6 +100,10 @@
             "hero.cta2": "Conheça a Marcia",
             "hero.scroll": "Role para começar",
             "marquee": "Orçamento · Dívidas · Investimentos · Poupança · Milhas · ",
+            "skip": "Pular para o conteúdo principal",
+            "motion.pause": "Pausar animação",
+            "motion.play": "Retomar animação",
+            "range.perMonth": "por mês",
             "services.kicker": "O território",
             "services.t1": "Quatro rotas,",
             "services.t2": "um destino.",
@@ -95,27 +112,32 @@
             "services.2.name": "Gestão de Dívidas",
             "services.2.desc": "Estratégias para eliminar dívidas com eficiência e retomar o controle da sua saúde financeira.",
             "services.3.name": "Investimentos para Iniciantes",
-            "services.3.desc": "O mercado financeiro, descomplicado — construindo uma carteira diversificada para o futuro.",
+            "services.3.desc": "Entenda como funciona o mercado de ações para fazer as suas próprias escolhas de investimento com confiança.",
             "services.4.name": "Milhas & Descontos",
             "services.4.desc": "Maximize recompensas, viaje gastando menos e descubra economias escondidas no dia a dia.",
             "instrument.kicker": "O instrumento",
             "instrument.t1": "Quanto o seu dinheiro",
             "instrument.t2": "poderia crescer?",
-            "instrument.sub": "Arraste o medidor. Um hábito — um valor guardado por mês — se transforma em algo bem maior.",
+            "instrument.sub": "Arraste o medidor. Um hábito, um valor guardado por mês, pode se transformar em algo bem maior.",
             "instrument.permonth": "guardado por mês",
             "instrument.note": "Mantido por dez anos com crescimento de 8% ao ano, esse hábito se torna",
-            "instrument.foot": "8% é uma estimativa conservadora baseada no histórico de longo prazo do mercado de ações — o S&P 500 rendeu em média cerca de 10% ao ano nos últimos 50 anos. Apenas ilustrativo — não é aconselhamento financeiro, e rentabilidade passada não garante retornos futuros.",
-            "instrument.figcap": "Notas de campo — o planner Money Map",
-            "about.kicker": "A guia",
-            "about.t1": "Sua parceira na",
-            "about.t2": "construção de patrimônio.",
-            "about.desc": "Liberdade financeira não é só sobre números; é a confiança de viver a vida que você quer. Como Consultora de Finanças Pessoais Certificada, eu conecto conceitos financeiros complexos a hábitos diários práticos.",
-            "about.c1": "Consultora de Finanças Pessoais Certificada (C.P.F.E.®)",
+            "instrument.foot": "8% é uma estimativa conservadora baseada no histórico de longo prazo do mercado de ações. O S&P 500 rendeu em média cerca de 10% ao ano nos últimos 50 anos. Apenas ilustrativo, não é aconselhamento financeiro. Rentabilidade passada não garante retornos futuros.",
+            "instrument.figcap": "Notas de campo: o planner My Money Life",
+            "about.kicker": "Conheça a Marcia",
+            "about.t1": "Oi, eu sou a Marcia.",
+            "about.desc": "Já morei, trabalhei e estudei no Brasil, na Austrália e no Reino Unido. Cada mudança foi começar do zero: abrir contas no banco, construir histórico de crédito, comprar tudo de novo. Sei o quanto isso exige planejamento.",
+            "about.desc2": "Depois de mais de 20 anos em finanças corporativas, mudei para as finanças pessoais porque queria que o meu trabalho ajudasse as pessoas diretamente.",
+            "about.desc3": "Também passei por momentos importantes com dinheiro. Conseguir o meu primeiro emprego em um novo país foi difícil, assim como passar por um divórcio sendo responsável por mim e pela minha filha. Como sempre fui organizada com dinheiro, eu tinha escolhas e nunca me senti presa.",
+            "about.desc4": "Cuidar do dinheiro sempre foi natural para mim, e foi isso que me permitiu estudar e trabalhar fora. Quero que você sinta essa mesma liberdade. Sei como as grandes mudanças podem ser estressantes, por isso conduzo cada sessão com empatia.",
+            "about.desc5": "Hoje atendo clientes no mundo todo. Tenho formação em planejamento financeiro para necessidades especiais, então posso apoiar famílias neurodivergentes e com necessidades especiais. Também ajudo brasileiros que vivem fora do Brasil.",
+            "about.desc6": "A experiência de cada pessoa com o dinheiro é diferente e pessoal, então começamos pela sua. Vamos ter uma visão clara do seu dinheiro e trabalhar qualquer preocupação ou sentimento negativo que esteja te travando. Depois, montamos um plano que cabe na sua vida.",
+            "about.desc7": "Família e amigos são a minha âncora. Sou mãe e madrasta de adolescentes. Amo música, toco alguns instrumentos e canto no UK Show Choir em lugares incríveis.",
+            "about.c1": "Especialista em Finanças Pessoais Certificada (C.P.F.E.®)",
             "about.c2": "Membro da Personal Finance Society (Reino Unido) e da ABEFIN (Brasil)",
-            "about.c3": "Mentorias financeiras internacionais, entre países",
-            "about.c4": "Acolhedora, inclusiva e sem julgamentos",
-            "about.c5": "Roteiros personalizados para cada cliente",
-            "about.cta": "Agende uma conversa gratuita",
+            "about.c3": "Sessões em português, inglês ou espanhol",
+            "about.c4": "Pode me perguntar qualquer coisa. Nenhuma pergunta é boba.",
+            "about.c5": "Formada em Primeiros Socorros em Saúde Mental (MHFA England)",
+            "about.cta": "Vamos mapear as suas finanças",
             "contact.kicker": "O primeiro passo",
             "contact.t1": "Pronto para desenhar",
             "contact.t2": "o seu mapa?",
@@ -126,11 +148,11 @@
             "contact.placeholder": "ex.: ‘Começar a investir’, ‘Planejar viagens’",
             "contact.submit": "Enviar mensagem",
             "contact.sending": "Enviando…",
-            "contact.success": "Obrigada — a Marcia entrará em contato em breve.",
+            "contact.success": "Obrigada! A Marcia entrará em contato em breve.",
             "contact.error": "Algo deu errado. Tente novamente ou envie um e-mail diretamente.",
             "contact.figcap": "Vamos começar a fazer o seu dinheiro crescer.",
             "footer.tag": "Fortalecendo o seu futuro financeiro.",
-            "footer.copy": "© 2026 My Money Map. Todos os direitos reservados."
+            "footer.copy": "© 2026 My Money Life. Todos os direitos reservados."
         }
     };
 
@@ -180,7 +202,7 @@
     const canvas = document.getElementById("terrain");
     if (canvas && typeof THREE !== "undefined" && !prefersReduced) {
         const hero = document.getElementById("hero");
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, premultipliedAlpha: false });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
         const scene = new THREE.Scene();
@@ -194,16 +216,16 @@
         const basePos = geo.attributes.position.array.slice();
 
         const mat = new THREE.MeshBasicMaterial({
-            color: 0xc0431f,
+            color: 0x4e6b52,
             wireframe: true,
             transparent: true,
-            opacity: 0.10
+            opacity: 0.07
         });
         const terrain = new THREE.Mesh(geo, mat);
         terrain.position.y = -1.4;
         scene.add(terrain);
 
-        // Cheap layered-sine "noise" — no library needed, looks like contours in motion
+        // Cheap layered-sine "noise", no library needed, looks like contours in motion
         function height(x, z, t) {
             return (
                 Math.sin(x * 0.55 + t * 0.45) * 0.55 +
@@ -241,15 +263,18 @@
             camera.position.y += (4.2 - mouseY * 1.2 - camera.position.y) * 0.04;
             camera.lookAt(0, 0, 0);
             renderer.render(scene, camera);
-            rafId = requestAnimationFrame(tick);
+            rafId = motionPaused ? null : requestAnimationFrame(tick);
         }
         rafId = requestAnimationFrame(tick);
+        motionListeners.push(paused => {
+            if (!paused && !rafId) rafId = requestAnimationFrame(tick);
+        });
 
-        // Pause rendering when hero is off-screen — keeps scroll buttery
+        // Pause rendering when hero is off-screen, keeps scroll buttery
         new IntersectionObserver(entries => {
             entries.forEach(en => {
                 if (en.isIntersecting) {
-                    if (!rafId) rafId = requestAnimationFrame(tick);
+                    if (!rafId && !motionPaused) rafId = requestAnimationFrame(tick);
                 } else {
                     cancelAnimationFrame(rafId);
                     rafId = null;
@@ -315,6 +340,7 @@
             ScrollTrigger.create({
                 onUpdate: self => { drift.timeScale(self.direction === -1 ? -1 : 1); }
             });
+            motionListeners.push(paused => { paused ? drift.pause() : drift.resume(); });
         }
 
         // --- Nav: hide on scroll down, show on scroll up ---
@@ -334,6 +360,8 @@
         const ticksGroup = document.getElementById("gaugeTicks");
         const gaugeValue = document.getElementById("gaugeValue");
         const projValue = document.getElementById("projValue");
+        const projLive = document.getElementById("projLive");
+        let announceTimer;
 
         const ARC_LEN = Math.PI * 120; // semicircle r=120
         fill.style.strokeDasharray = ARC_LEN;
@@ -375,6 +403,12 @@
                 projValue.textContent = fmt(state.amount * FACTOR);
             }
             gaugeValue.textContent = fmt(state.amount);
+            range.setAttribute("aria-valuetext", fmt(state.amount) + " " + translations[currentLang]["range.perMonth"]);
+            clearTimeout(announceTimer);
+            announceTimer = setTimeout(() => {
+                const note = document.querySelector('[data-i18n="instrument.note"]').textContent.trim();
+                projLive.textContent = note + " " + fmt(state.amount * FACTOR) + ".";
+            }, 700);
         }
 
         range.addEventListener("input", () => { state.amount = Number(range.value); render(); });
@@ -447,6 +481,38 @@
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = dict["contact.submit"];
+            }
+        });
+    }
+
+    /* ================= Pause motion (WCAG 2.2.2) ================= */
+    const motionToggle = document.getElementById("motionToggle");
+    if (motionToggle && !prefersReduced) {
+        motionToggle.hidden = false;
+        motionToggle.addEventListener("click", () => {
+            motionPaused = !motionPaused;
+            motionToggle.setAttribute("aria-pressed", String(motionPaused));
+            const key = motionPaused ? "motion.play" : "motion.pause";
+            motionToggle.dataset.i18n = key;
+            motionToggle.textContent = translations[currentLang][key];
+            motionListeners.forEach(fn => fn(motionPaused));
+        });
+    }
+
+    /* ================= Phone menu ================= */
+    const siteNav = document.getElementById("nav");
+    const navToggle = document.getElementById("navToggle");
+    if (siteNav && navToggle) {
+        const setMenu = open => {
+            siteNav.classList.toggle("menu-open", open);
+            navToggle.setAttribute("aria-expanded", String(open));
+        };
+        navToggle.addEventListener("click", () => setMenu(!siteNav.classList.contains("menu-open")));
+        document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape" && siteNav.classList.contains("menu-open")) {
+                setMenu(false);
+                navToggle.focus();
             }
         });
     }

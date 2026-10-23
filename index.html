@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Money Map | A Field Guide to Your Money</title>
+    <title>My Money Life | A Field Guide to Your Money</title>
     <meta name="description"
-        content="Personal finance coaching with Marcia. Budgeting, investing, debt management and savings — mapped out, step by step.">
+        content="Personal finance coaching with Marcia. Budgeting, investing, debt management and savings, mapped out step by step.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +20,8 @@
 
 <body data-lang="en">
 
+    <a href="#top" class="skip-link" data-i18n="skip">Skip to main content</a>
+
     <!-- Custom cursor (desktop only) -->
     <div class="cursor-dot" aria-hidden="true"></div>
     <div class="cursor-ring" aria-hidden="true"></div>
@@ -27,7 +29,7 @@
     <!-- Loader -->
     <div class="loader" id="loader" aria-hidden="true">
         <div class="loader-inner">
-            <span class="loader-word">My&nbsp;Money&nbsp;Map</span>
+            <span class="loader-word">My&nbsp;Money&nbsp;Life</span>
             <span class="loader-rule"></span>
         </div>
     </div>
@@ -35,13 +37,14 @@
     <!-- ================= NAV ================= -->
     <header class="nav" id="nav">
         <a href="#top" class="nav-brand">
-            My&nbsp;Money&nbsp;Map<span class="brand-dot">.</span>
+            My&nbsp;Money&nbsp;Life<span class="brand-dot">.</span>
         </a>
-        <nav class="nav-links" aria-label="Primary">
+        <nav class="nav-links" id="navLinks" aria-label="Primary">
             <a href="#services" class="nav-link" data-i18n="nav.services">The Territory</a>
             <a href="#instrument" class="nav-link" data-i18n="nav.instrument">The Instrument</a>
             <a href="#about" class="nav-link" data-i18n="nav.about">The Guide</a>
             <a href="#contact" class="nav-link" data-i18n="nav.contact">First Step</a>
+            <a href="#contact" class="nav-link nav-menu-cta" data-i18n="nav.cta">Book a free call</a>
         </nav>
         <div class="nav-right">
             <div class="lang-switch" role="group" aria-label="Language">
@@ -50,6 +53,8 @@
                 <button class="lang-btn" data-lang="pt">PT</button>
             </div>
             <a href="#contact" class="btn-pill magnetic" data-i18n="nav.cta">Book a free call</a>
+            <button type="button" class="nav-toggle mono" id="navToggle" aria-expanded="false"
+                aria-controls="navLinks" data-i18n="nav.menu">Menu</button>
         </div>
     </header>
 
@@ -73,10 +78,7 @@
                 </h1>
 
                 <div class="hero-foot">
-                    <p class="hero-desc" data-i18n="hero.desc">
-                        Expert coaching on budgeting, debt and investing.
-                        Let's chart the route to your financial freedom — together.
-                    </p>
+                    <p class="hero-desc" data-i18n="hero.desc">Expert coaching on budgeting, debt and investing. Let’s chart the route to your financial freedom, together.</p>
                     <div class="hero-ctas">
                         <a href="#instrument" class="btn-solid magnetic" data-i18n="hero.cta1">Start your journey</a>
                         <a href="#about" class="btn-ghost magnetic" data-i18n="hero.cta2">Meet Marcia</a>
@@ -91,10 +93,14 @@
         </section>
 
         <!-- ================= MARQUEE ================= -->
-        <div class="marquee" aria-hidden="true">
-            <div class="marquee-track" id="marqueeTrack">
-                <span class="marquee-seq" data-i18n="marquee">Budgeting&ensp;·&ensp;Debt&ensp;·&ensp;Investing&ensp;·&ensp;Savings&ensp;·&ensp;Miles&ensp;·&ensp;</span>
+        <div class="marquee-wrap">
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee-track" id="marqueeTrack">
+                    <span class="marquee-seq" data-i18n="marquee">Budgeting&ensp;·&ensp;Debt&ensp;·&ensp;Investing&ensp;·&ensp;Savings&ensp;·&ensp;Miles&ensp;·&ensp;</span>
+                </div>
             </div>
+            <button type="button" class="motion-toggle mono" id="motionToggle" aria-pressed="false" hidden
+                data-i18n="motion.pause">Pause motion</button>
         </div>
 
         <!-- ================= 01 SERVICES ================= -->
@@ -116,28 +122,23 @@
                     <h3 class="service-name" data-i18n="services.1.name">Budgeting &amp; Planning</h3>
                     <p class="service-desc" data-i18n="services.1.desc">A realistic spending plan that fits your
                         lifestyle while protecting your long-term goals.</p>
-                    <span class="service-arrow" aria-hidden="true">→</span>
                 </li>
                 <li class="service-row reveal" data-index="02">
                     <span class="service-num">02</span>
                     <h3 class="service-name" data-i18n="services.2.name">Debt Management</h3>
                     <p class="service-desc" data-i18n="services.2.desc">Strategies to dismantle debt efficiently and
                         take back control of your financial health.</p>
-                    <span class="service-arrow" aria-hidden="true">→</span>
                 </li>
                 <li class="service-row reveal" data-index="03">
                     <span class="service-num">03</span>
                     <h3 class="service-name" data-i18n="services.3.name">Investing Basics</h3>
-                    <p class="service-desc" data-i18n="services.3.desc">The stock market, demystified — building a
-                        diversified portfolio for future growth.</p>
-                    <span class="service-arrow" aria-hidden="true">→</span>
+                    <p class="service-desc" data-i18n="services.3.desc">Learn how the stock market works, so you can make your own investing choices with confidence.</p>
                 </li>
                 <li class="service-row reveal" data-index="04">
                     <span class="service-num">04</span>
                     <h3 class="service-name" data-i18n="services.4.name">Miles &amp; Discounts</h3>
                     <p class="service-desc" data-i18n="services.4.desc">Maximise rewards, travel for less, and surface
                         the hidden savings in everyday life.</p>
-                    <span class="service-arrow" aria-hidden="true">→</span>
                 </li>
             </ul>
         </section>
@@ -157,18 +158,16 @@
                         <em class="accent" data-i18n="instrument.t2">your money grow?</em>
                     </h2>
 
-                    <p class="chapter-sub reveal" data-i18n="instrument.sub">
-                        Drag the dial. One habit — a monthly amount set aside — compounds into something bigger.
-                    </p>
+                    <p class="chapter-sub reveal" data-i18n="instrument.sub">Drag the dial. One habit, a monthly amount set aside, can grow into something bigger.</p>
                 </div>
 
                 <figure class="instrument-figure">
                     <div class="reveal-img">
                         <img src="assets/images/planner_flatlay.jpeg"
-                            alt="The Money Map planner open at the monthly net worth tracker, with coffee and calculator"
+                            alt="The My Money Life planner open at the monthly net worth tracker, with coffee and calculator"
                             class="instrument-img">
                     </div>
-                    <figcaption class="mono" data-i18n="instrument.figcap">Field notes — the Money Map planner</figcaption>
+                    <figcaption class="mono" data-i18n="instrument.figcap">Field notes: the My Money Life planner</figcaption>
                 </figure>
             </div>
 
@@ -201,11 +200,8 @@
                             Kept up for ten years at a steady 8% annual growth, that habit becomes
                         </p>
                         <p class="projection-value" id="projValue">£46,041</p>
-                        <p class="projection-foot mono" data-i18n="instrument.foot">
-                            8% is a conservative take on long-term stock market history — the S&amp;P 500 has
-                            averaged around 10% a year over the past 50 years. Illustration only — not financial
-                            advice, and past performance doesn't guarantee future returns.
-                        </p>
+                        <p class="visually-hidden" id="projLive" aria-live="polite"></p>
+                        <p class="projection-foot mono" data-i18n="instrument.foot">8% is a conservative take on long-term stock market history. The S&amp;P 500 has averaged around 10% a year over the past 50 years. Illustration only, not financial advice. Past performance doesn’t guarantee future returns.</p>
                     </div>
                 </div>
             </div>
@@ -215,7 +211,7 @@
         <section class="chapter about" id="about">
             <p class="kicker reveal">
                 <span class="kicker-num">03</span>
-                <span data-i18n="about.kicker">The guide</span>
+                <span data-i18n="about.kicker">Meet Marcia</span>
                 <span class="kicker-rule"></span>
             </p>
 
@@ -223,39 +219,37 @@
                 <div class="about-media">
                     <div class="reveal-img">
                         <img src="assets/images/marcia_portrait.jpeg"
-                            alt="Marcia, certified personal finance consultant" class="about-img">
+                            alt="Marcia, certified personal finance expert" class="about-img">
                     </div>
                     <div class="about-media-offset reveal-img">
                         <img src="assets/images/marcia_standing.jpeg"
-                            alt="Marcia standing, ready to guide your financial journey" class="about-img">
+                            alt="Marcia standing, full-length photo" class="about-img">
                     </div>
                     <span class="about-badge mono">C.P.F.E.®&nbsp;Certified</span>
                 </div>
 
                 <div class="about-copy">
                     <h2 class="chapter-title reveal">
-                        <span data-i18n="about.t1">Your partner in</span><br>
-                        <em class="accent" data-i18n="about.t2">wealth building.</em>
+                        <span data-i18n="about.t1">Hi, I’m Marcia.</span>
                     </h2>
-                    <p class="about-desc reveal" data-i18n="about.desc">
-                        Financial freedom isn't just about the numbers; it's the confidence to live the life you
-                        want. As a Certified Personal Finance Consultant, I bridge the gap between complex financial
-                        concepts and actionable daily habits.
-                    </p>
+                    <p class="about-desc reveal" data-i18n="about.desc">I’ve lived, worked and studied in Brazil, Australia and the UK. Each move meant starting from zero: new bank accounts, no credit history, buying everything again. I know how much planning that takes.</p>
+                    <p class="about-desc reveal" data-i18n="about.desc2">After more than 20 years in corporate finance, I moved into personal finance because I wanted my work to help people directly.</p>
+                    <p class="about-desc reveal" data-i18n="about.desc3">I’ve faced big money moments of my own. Finding my first job in a new country was hard, and so was going through a divorce while responsible for myself and my daughter. Because I’ve always been organised with money, I had choices and never felt trapped.</p>
+                    <p class="about-desc reveal" data-i18n="about.desc4">Managing money has always come naturally to me, and it’s what let me study and work abroad. I’d like you to have that same sense of freedom. I know how stressful big changes can be, so I lead every session with empathy.</p>
+                    <p class="about-desc reveal" data-i18n="about.desc5">Today I work with clients around the world. I’m trained in special needs financial planning, so I can support neurodivergent and special needs families. I also help Brazilians living abroad.</p>
+                    <p class="about-desc reveal" data-i18n="about.desc6">Everyone’s experience with money is different and personal, so we start with yours. We’ll get a clear picture of your money and work through any worries or negative feelings that hold you back. Then we’ll build a plan that fits your life.</p>
+                    <p class="about-desc reveal" data-i18n="about.desc7">Family and friends are my anchor. I’m a mum and stepmum to teenagers. I love music, and I play a few instruments and sing with UK Show Choir at some epic venues.</p>
                     <ul class="creds">
-                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c1">Certified
-                                Personal Finance Consultant (C.P.F.E.®)</span></li>
+                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c1">Certified Personal Finance Expert (C.P.F.E.®)</span></li>
                         <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c2">Member of
                                 the Personal Finance Society (UK) and ABEFIN (Brazil)</span></li>
                         <li class="cred reveal"><span class="cred-marker"></span><span
-                                data-i18n="about.c3">Cross-border money mentoring sessions</span></li>
+                                data-i18n="about.c3">Sessions in English, Portuguese or Spanish</span></li>
                         <li class="cred reveal"><span class="cred-marker"></span><span
-                                data-i18n="about.c4">Approachable, inclusive, non-judgemental</span></li>
-                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c5">Tailored
-                                roadmaps for every client</span></li>
+                                data-i18n="about.c4">Ask me anything. No question is silly.</span></li>
+                        <li class="cred reveal"><span class="cred-marker"></span><span data-i18n="about.c5">Mental Health First Aider (MHFA England)</span></li>
                     </ul>
-                    <a href="#contact" class="btn-solid magnetic reveal" data-i18n="about.cta">Book a free discovery
-                        call</a>
+                    <a href="#contact" class="btn-solid magnetic reveal" data-i18n="about.cta">Let’s map out your finances</a>
                 </div>
             </div>
         </section>
@@ -314,17 +308,16 @@
     <!-- ================= FOOTER ================= -->
     <footer class="footer">
         <div class="footer-top">
-            <span class="footer-brand">My&nbsp;Money&nbsp;Map<span class="brand-dot">.</span></span>
+            <span class="footer-brand">My&nbsp;Money&nbsp;Life<span class="brand-dot">.</span></span>
             <p class="footer-tag" data-i18n="footer.tag">Empowering your financial future.</p>
         </div>
         <div class="footer-bottom mono">
-            <span>myfinancemap.uk</span>
             <span class="footer-social">
                 <a href="https://www.linkedin.com/in/marciapregal/" target="_blank" rel="noopener">LinkedIn</a>
                 <span>&ensp;/&ensp;</span>
                 <a href="https://www.instagram.com/myfinancemap.uk/" target="_blank" rel="noopener">Instagram</a>
             </span>
-            <span data-i18n="footer.copy">© 2026 My Money Map. All rights reserved.</span>
+            <span data-i18n="footer.copy">© 2026 My Money Life. All rights reserved.</span>
         </div>
     </footer>
 
